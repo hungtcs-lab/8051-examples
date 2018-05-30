@@ -53,7 +53,8 @@ void lcd1602_init()
   lcd1602_write(0x06, LCD1602_COMMAND);
   delay(5);
   // 开显示，开光标，光标闪烁
-  lcd1602_write(0x0e, LCD1602_COMMAND);
+  // lcd1602_write(0x0e, LCD1602_COMMAND);
+  lcd1602_write(0x0C, LCD1602_COMMAND);
   delay(1);
   // 光标自动右移
   lcd1602_write(0x14, LCD1602_COMMAND);
