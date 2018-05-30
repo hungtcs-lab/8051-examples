@@ -9,7 +9,7 @@ void hc_sr04_init_timer0()
   // make more loose
   // 65536 - (15000 / ( 12 / 11.0592)) = 51712 = CA00H
   TMOD |= 0x01;
-  TH0 = 0xCA;
+  TH0 = 0x00;
   TL0 = 0x00;
   // enable timer0 interrupt
   ET0 = 1;
@@ -36,9 +36,9 @@ int hc_sr04_echo_pulse()
   return (TH0 * 256 + TL0) * (12 / CRYSTAL_FREQUENCY);
 }
 
-float hc_sr04_get_distance()
+unsigned int hc_sr04_get_distance()
 {
-  int duration;
+  unsigned int duration;
   hc_sr04_init_timer0();
   hc_sr04_trigger();
   duration = hc_sr04_echo_pulse();

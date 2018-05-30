@@ -17,6 +17,6 @@ int  hc_sr04_echo_pulse();
 /**
  * calculation the distance
  */
-float hc_sr04_get_distance();
+unsigned int hc_sr04_get_distance();
 
 #endif

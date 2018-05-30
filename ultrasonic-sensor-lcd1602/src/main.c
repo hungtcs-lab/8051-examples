@@ -4,6 +4,7 @@
 #include "hc-sr04.h"
 
 unsigned char template[] = "distance: 000cm ";
+unsigned char overstep[] = "overstep!       ";
 
 void setup()
 {
@@ -14,17 +15,26 @@ void setup()
 void loop()
 {
   unsigned char i;
-  unsigned int  distance;
+  unsigned int distance;
   distance = (int)hc_sr04_get_distance();
 
-  template[10] = distance / 100;
-  template[11] = distance % 100 / 10;
-  template[12] = distance % 100 % 10;
-
   lcd1602_write(0x80, LCD1602_COMMAND);
-  for(i=0; i<16; i++)
+  if(distance > 450)
   {
-    lcd1602_write(template[i], LCD1602_DATA);
+    for(i=0; i<16; i++)
+    {
+      lcd1602_write(overstep[i], LCD1602_DATA);
+    }
+  }
+  else
+  {
+    template[10] = (distance / 100) + 0x30;
+    template[11] = (distance % 100 / 10) + 0x30;
+    template[12] = (distance % 100 % 10) + 0x30;
+    for(i=0; i<16; i++)
+    {
+      lcd1602_write(template[i], LCD1602_DATA);
+    }
   }
   delay(300);
 }
