@@ -1,38 +1,30 @@
+#include <stdint.h>
+#include <string.h>
 #include <mcs51/8051.h>
 #include "delay.h"
 #include "lcd1602.h"
 
-__code unsigned char line1[] = "  hello world!  ";
-__code unsigned char line2[] = " happy LCD1602! ";
-
-void display()
-{
-  unsigned char i;
-  lcd1602_write(0x80, LCD1602_COMMAND);
-  for(i=0; i<16; i++)
-  {
-    lcd1602_write(line1[i], LCD1602_DATA);
-  }
-
-  lcd1602_write(0xC0, LCD1602_COMMAND);
-  for(i=0; i<16; i++)
-  {
-    lcd1602_write(line2[i], LCD1602_DATA);
-  }
-}
+const unsigned char __data CENTIGRADE[] = { 0x18, 0x18, 0x07, 0x08, 0x08, 0x08, 0x07, 0x00 };
 
 void setup()
 {
   lcd1602_init();
   lcd1602_clear();
+
+  // 注册自定义字符
+  lcd1602_custom_character(0, CENTIGRADE);
+
+  // 显示自定义字符
+  lcd1602_write(0x80, LCD1602_COMMAND);
+  lcd1602_write(0, LCD1602_DATA);
+
+  // 直接显示字符串
+  lcd1602_print(0, 2, "hello world!");
 }
 
 void loop()
 {
-  lcd1602_clear();
-  delay(1000);
-  display();
-  delay(1000);
+
 }
 
 void main(void)

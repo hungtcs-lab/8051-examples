@@ -1,3 +1,4 @@
+#include <string.h>
 #include "defines.h"
 #include "lcd1602.h"
 #include "delay.h"
@@ -53,30 +54,30 @@ void lcd1602_init()
   delay(1);
 }
 
-// REVIEW 检查是否正常工作
-void lcd1602_custom_character(unsigned index, unsigned char *model)
+void lcd1602_custom_character(unsigned index, unsigned char model[])
 {
   unsigned char i;
-  lcd1602_write(index, LCD1602_COMMAND);
+  lcd1602_write((0x40 + index * 8), LCD1602_COMMAND);
   for(i=0; i<8; i++)
   {
     lcd1602_write(model[i], LCD1602_DATA);
   }
 }
 
-// REVIEW 检查是否正常工作
 void lcd1602_print(unsigned char x, unsigned char y, unsigned char *content)
 {
-  unsigned char address;
+  unsigned char i, address;
   // 计算地址
   if(y==1)
-  {
     address = 0x80 + x;
-  }
   else if(y==2)
-  {
     address = 0xC0 + x;
-  }
+  else
+    return;
+
   lcd1602_write(address, LCD1602_COMMAND);
-  lcd1602_write(content, LCD1602_DATA);
+  for(i=0; i<strlen(content); i++)
+  {
+    lcd1602_write(content[i], LCD1602_DATA);
+  }
 }
