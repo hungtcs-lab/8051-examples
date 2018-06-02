@@ -29,6 +29,8 @@ void hc_sr04_trigger()
 
 int hc_sr04_echo_pulse()
 {
+  // REVIEW 检查初始化定时器的代码放在这里是否合适
+  hc_sr04_init_timer0();
   while(!HC_SR04_ECHO);
   TR0 = 1;
   while(HC_SR04_ECHO);
@@ -39,7 +41,6 @@ int hc_sr04_echo_pulse()
 unsigned int hc_sr04_get_distance()
 {
   unsigned int duration;
-  hc_sr04_init_timer0();
   hc_sr04_trigger();
   duration = hc_sr04_echo_pulse();
   return duration * 0.017;
