@@ -16,7 +16,7 @@ __bit lcd1602_busy_flag()
 
 void lcd1602_write(unsigned char data, __bit type)
 {
-  while(lcd1602_busy_flag());
+  while(!lcd1602_busy_flag());
   LCD1602_RS = type;
   LCD1602_RW = 0;
   LCD1602_EN = 1;
