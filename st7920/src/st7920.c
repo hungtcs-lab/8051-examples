@@ -3,40 +3,6 @@
 #include "defines.h"
 #include "delay.h"
 
-void st7920_serial_write(unsigned char data)
-{
-  unsigned char i;
-  for(i=0; i<8; i++)
-  {
-    ST7920_SCK = 0;
-    ST7920_SID = (data << i) & 0x80;
-    ST7920_SCK = 1;
-  }
-}
-
-void st7920_serial_write_data(unsigned char data)
-{
-  // 0b 1 1 1 1 1 RW RS 0
-  // 0b 1 1 1 1 1 0  1  0
-  st7920_serial_write(0xFA);
-  st7920_serial_write(data & 0xF0);
-  st7920_serial_write((data << 4) & 0xF0);
-}
-
-void st7920_serial_write_command(unsigned char command)
-{
-  // 0b 1 1 1 1 1 RW RS 0
-  // 0b 1 1 1 1 1 0  0  0
-  st7920_serial_write(0xF8);
-  st7920_serial_write(command & 0xF0);
-  st7920_serial_write((command << 4) & 0xF0);
-}
-
-void st7920_parallel_4bit_write(unsigned char data, __bit type)
-{
-  // pass
-}
-
 __bit st7920_parallel_8bit_busy_flag()
 {
   ST7920_DATA_PORT = 0xFF;
@@ -56,6 +22,20 @@ void st7920_parallel_8bit_write(unsigned char data, __bit type)
   ST7920_DATA_PORT = data;
   __nop();
   ST7920_EN = 0;
+}
+
+unsigned char st7920_parallel_8bit_read(__bit type)
+{
+  unsigned char data;
+  while(!st7920_parallel_8bit_busy_flag());
+  ST7920_RS = type;
+  ST7920_RW = 1;
+  ST7920_EN = 1;
+  __nop();
+  data = ST7920_DATA_PORT;
+  __nop();
+  ST7920_EN = 0;
+  return data;
 }
 
 void st7920_parallel_8bit_clear()
@@ -108,4 +88,61 @@ void st7920_parallel_8bit_print(unsigned char x, unsigned char y, unsigned char 
   {
     st7920_parallel_8bit_write(content[i], ST7920_DATA);
   }
+}
+
+void st7920_parallel_8bit_clear_rect(unsigned char x, unsigned char y, unsigned char width, unsigned char height)
+{
+  unsigned char i, j, d1, d2;
+
+  for(j=y; j<y+height; j++)
+  {
+    for(i=x; i<x+width; i++)
+    {
+      st7920_parallel_8bit_write(0x30, ST7920_COMMAND);
+      st7920_parallel_8bit_write(0x80 + j, ST7920_COMMAND);
+      // st7920_parallel_8bit_write(0x80 + i, ST7920_COMMAND);
+      st7920_parallel_8bit_read(1);
+      d1 = st7920_parallel_8bit_read(1);
+      // d2 = st7920_parallel_8bit_read(1);
+      d1 |= 0x7F >> i;
+
+
+      st7920_parallel_8bit_write(0x34, ST7920_COMMAND);
+      st7920_parallel_8bit_write(0x80 + j, ST7920_COMMAND);
+      st7920_parallel_8bit_write(0x80 + i, ST7920_COMMAND);
+      st7920_parallel_8bit_write(0x30, ST7920_COMMAND);
+
+      st7920_parallel_8bit_write(d1, ST7920_DATA);
+      st7920_parallel_8bit_write(0xFF, ST7920_DATA);
+      // redraw
+      st7920_parallel_8bit_write(0x36, ST7920_COMMAND);
+    }
+  }
+}
+
+void st7920_parallel_8bit_draw_point(unsigned char x, unsigned char y)
+{
+  unsigned int bt, read;
+  unsigned char addr_x, addr_y, h_bit, l_bit;
+  addr_y = 0x80 + y % 32;
+  addr_x = y < 32 ? (0x80 + x / 16) : (0x88 + x / 16);
+
+  bt = 0x80000 >> (x % 16);
+  st7920_parallel_8bit_write(0x34, ST7920_COMMAND);
+  st7920_parallel_8bit_write(addr_y, ST7920_COMMAND);
+  st7920_parallel_8bit_write(addr_x, ST7920_COMMAND);
+  st7920_parallel_8bit_read(1);
+  read = st7920_parallel_8bit_read(1);
+  read << 8;
+  read |= st7920_parallel_8bit_read(1);
+  bt |= read;
+  h_bit = bt >> 8;
+  l_bit = bt;
+
+  st7920_parallel_8bit_write(addr_y, ST7920_COMMAND);
+  st7920_parallel_8bit_write(addr_x, ST7920_COMMAND);
+  st7920_parallel_8bit_write(h_bit, ST7920_DATA);
+  st7920_parallel_8bit_write(l_bit, ST7920_DATA);
+
+  st7920_parallel_8bit_write(0x36, ST7920_COMMAND);
 }
