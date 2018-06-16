@@ -5,14 +5,6 @@
 unsigned char __code content_1[] = "hello world!";
 unsigned char __code content_2[] = { 0xC4, 0xE3, 0xBA, 0xC3, 0xCA, 0xC0, 0xBD, 0xE7, 0xA3, 0xA1, '\0' };
 
-int putchar(int c)
-{
-  while(!(SCON & 0x02));
-  SCON &= ~0x02;
-  SBUF = c;
-  return (c);
-}
-
 void setup()
 {
   st7920_parallel_8bit_init();
