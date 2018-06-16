@@ -14,11 +14,4 @@
 // 数据
 #define ST7920_DATA_PORT P0
 
-// 片选
-#define ST7920_CS        P0_0
-// 数据
-#define ST7920_SID       P0_1
-// 时钟
-#define ST7920_SCK       P0_2
-
 #endif
