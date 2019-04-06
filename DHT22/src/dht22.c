@@ -1,15 +1,13 @@
 #include "dht22.h"
 
-#include "stdio.h"
-
 void delay_10us()
 {
   __nop();
   __nop();
   __nop();
   __nop();
-  __nop();
-  __nop();
+  // __nop();
+  // __nop();
 }
 
 uint32_t dht22_read_data(void)
@@ -62,6 +60,7 @@ void dht22_measuring(DHT22MeasurementResult *result)
 {
   float humidity;
   float temperature;
+  uint8_t subzero = 0;
   uint32_t value;
 
   DHT22_PIN = 1;
@@ -89,9 +88,22 @@ void dht22_measuring(DHT22MeasurementResult *result)
   {
     result -> state = 0;
     humidity = (value >> 28 & 0x0F) * 4096 + (value >> 24 & 0x0F) * 256 + (value >> 20 & 0x0F) * 16 + (value >> 16 & 0x0F);
-    temperature = ((value >> 12) & 0x0F) * 4096 + ((value >> 8) & 0x0F) * 256 + ((value >> 4) & 0x0F) * 16 + (value & 0x0F);
     result -> humidity = humidity / 10;
-    result -> temperature = temperature / 10;
+
+    if(value & 0x8000)
+    {
+      subzero = 1;
+      value &= 0x00007FFF;
+    }
+    temperature = ((value >> 12) & 0x0F) * 4096 + ((value >> 8) & 0x0F) * 256 + ((value >> 4) & 0x0F) * 16 + (value & 0x0F);
+    if(subzero)
+    {
+      result -> temperature = -(temperature / 10);
+    }
+    else
+    {
+      result -> temperature = temperature / 10;
+    }
   }
   else
   {

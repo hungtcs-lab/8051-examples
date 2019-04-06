@@ -33,16 +33,18 @@ void main()
 
   while(1)
   {
+    printf("start measuring...\n");
     dht22_measuring(&result);
     if(result.state == 0)
     {
-      printf("humidity: %d.%d \n", (int)result.humidity, (int)((result.humidity - ((int)result.humidity)) * 10));
-      printf("temperature: %d.%d \n", (int)result.temperature, (int)((result.temperature - ((int)result.temperature)) * 10));
+      printf("humidity: %d.%d%%RH\n", (int)result.humidity, (int)((result.humidity - ((int)result.humidity)) * 10));
+      printf("temperature: %d.%d`C\n", (int)result.temperature, (int)((result.temperature - ((int)result.temperature)) * 10));
     }
     else
     {
       printf("error: %d\n", result.state);
     }
+    printf("\n\n");
     delay_ms(3000);
   }
 }
