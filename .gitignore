@@ -10,3 +10,5 @@
 
 *.hex
 *.ihx
+
+.vscode/ipch/
