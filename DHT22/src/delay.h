@@ -6,9 +6,6 @@
 
 #define __nop()  __asm nop __endasm
 
-#define CRYSTAL_FREQUENCY   11.0592
-#define FS                  (1 / (CRYSTAL_FREQUENCY / 12))
-
 void delay_ms(uint16_t t);
 
 #endif

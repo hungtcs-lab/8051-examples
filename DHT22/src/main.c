@@ -3,12 +3,14 @@
 #include "delay.h"
 #include "dht22.h"
 
-int putchar(int c)
+/**
+ * 注意: 当前方法适用的sdcc版本为 3.5.0
+ */
+void putchar(char c)
 {
 	while(!(SCON & 0x02));
 	SCON &= ~0x02;
 	SBUF = c;
-	return (c);
 }
 
 void uart_init()
@@ -37,7 +39,7 @@ void main()
     dht22_measuring(&result);
     if(result.state == 0)
     {
-      printf("humidity: %d.%d%%RH\n", (int)result.humidity, (int)((result.humidity - ((int)result.humidity)) * 10));
+      printf("humidity: %d.%d%%\n", (int)result.humidity, (int)((result.humidity - ((int)result.humidity)) * 10));
       printf("temperature: %d.%d`C\n", (int)result.temperature, (int)((result.temperature - ((int)result.temperature)) * 10));
     }
     else

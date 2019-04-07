@@ -1,6 +1,9 @@
 {
     "files.associations": {
-        "8051.h": "c"
+        "*.html": "html",
+        "8051.h": "c",
+        "stdio.h": "c",
+        "cstdio": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

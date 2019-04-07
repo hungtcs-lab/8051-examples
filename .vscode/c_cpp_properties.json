@@ -4,10 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/local/share/sdcc/include/**"
+                "/usr/share/sdcc/include/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/local/bin/sdcc",
+            "compilerPath": "/usr/bin/sdcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64"

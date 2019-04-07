@@ -87,6 +87,7 @@ void dht22_measuring(DHT22MeasurementResult *result)
   if(value)
   {
     result -> state = 0;
+
     humidity = (value >> 28 & 0x0F) * 4096 + (value >> 24 & 0x0F) * 256 + (value >> 20 & 0x0F) * 16 + (value >> 16 & 0x0F);
     result -> humidity = humidity / 10;
 
