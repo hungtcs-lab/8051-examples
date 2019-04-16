@@ -79,3 +79,50 @@ uint8_t iic_read_byte(void)
   }
   return data;
 }
+
+uint8_t iic_single_byte_read(uint8_t deviceAddress, uint8_t registerAddress, uint8_t *data)
+{
+  iic_start();
+  iic_send_byte(deviceAddress);
+  if(iic_read_ack() == IIC_NACK)
+  {
+    return 1;
+  }
+  iic_send_byte(registerAddress);
+  if(iic_read_ack() == IIC_NACK)
+  {
+    return 2;
+  }
+  iic_start();
+  iic_send_byte(deviceAddress | 0x01);
+  if(iic_read_ack() == IIC_NACK)
+  {
+    return 3;
+  }
+  *data = iic_read_byte();
+  iic_nack();
+  iic_stop();
+  return 0;
+}
+
+uint8_t iic_single_byte_write(uint8_t deviceAddress, uint8_t registerAddress, uint8_t data)
+{
+  iic_start();
+  iic_send_byte(deviceAddress);
+  if(iic_read_ack() == IIC_NACK)
+  {
+    return 1;
+  }
+  iic_send_byte(registerAddress);
+  if(iic_read_ack() == IIC_NACK)
+  {
+    return 2;
+  }
+  iic_send_byte(data);
+  if(iic_read_ack() == IIC_NACK)
+  {
+    return 3;
+  }
+  iic_stop();
+  return 0;
+}
