@@ -1,11 +1,5 @@
 #include "spi.h"
 
-/**
- * @brief 进行一次SPI传输
- *
- * @param data
- * @return uint8_t
- */
 uint8_t spi_transmit(uint8_t data)
 {
   uint8_t i;
