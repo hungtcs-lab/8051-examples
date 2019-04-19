@@ -28,7 +28,7 @@ void main()
 
     while(1)
     {
-      nrf24_open_writing_pipe(address, tx_data);
+      nrf24_transmit(address, tx_data);
       delay_ms(3000);
     }
   #elif defined(NRF24_RECEIVER)
