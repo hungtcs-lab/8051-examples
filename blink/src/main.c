@@ -7,11 +7,9 @@ void delay(unsigned int t)
 
 void main()
 {
-  __bit status = 0;
   while(1)
   {
-    P0_0 = status;
-    status = !status;
-    delay(1000);
+    P1_0 = !P1_0;
+    delay(30000);
   }
 }
