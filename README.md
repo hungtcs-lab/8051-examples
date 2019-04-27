@@ -9,3 +9,6 @@ examples for 8051 microcontroller.
 
 ### DHT22
 - [DHT22](DHT22)
+
+### DS18B20
+- [DS18B20](DS18B20)
