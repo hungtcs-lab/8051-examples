@@ -12,3 +12,6 @@ examples for 8051 microcontroller.
 
 ### DS18B20
 - [DS18B20](DS18B20)
+
+### DS1302
+- [DS1302](DS1302)
