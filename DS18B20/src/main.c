@@ -1,5 +1,7 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <mcs51/8051.h>
 #include "delay.h"
 #include "serial.h"
@@ -38,12 +40,12 @@ void main(void)
 
   while(1)
   {
-    if(ds18b20_measuring(&temperature, DS18B20_RESOLUTION_9_BIT))
+    if(ds18b20_measuring(&temperature, DS18B20_RESOLUTION_12_BIT))
     {
       printf("temperature measuring error!\n");
       continue;
     }
-    printf("temperature: %d.%d`C\n", (int)temperature, (int)((temperature - ((int)(temperature))) * 10000));
-    delay_ms(3000);
+    printf("temperature: %d.%d`C\n", (int)temperature, (int)((fabsf(temperature) - abs((int)temperature)) * 10000));
+    delay_ms(1000);
   }
 }

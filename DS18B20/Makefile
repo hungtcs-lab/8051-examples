@@ -1,11 +1,12 @@
-DEVICE = STC89C52
+# 89, 12c5a, 12c52, 12cx052
+DEVICE = 89
 # set compiler path & parameters
 CC_ROOT =
 CC      = sdcc
 CFLAGS  =
 
 # set output folder and target name
-OUTPUT_DIR = ./$(DEVICE)
+OUTPUT_DIR = ./dist/$(DEVICE)
 TARGET     = $(OUTPUT_DIR)/$(DEVICE).hex
 
 # set project folder and files (all *.c)
@@ -36,7 +37,7 @@ $(TARGET): $(PRJ_OBJECTS)
 	$(CC) $(CFLAGS) -o $(TARGET) $^
 
 flash: $(TARGET)
-	stcflash $(TARGET)
+	stcflash --protocol $(DEVICE)  $(TARGET)
 
 clean:
 	rm $(OUTPUT_DIR)/*
