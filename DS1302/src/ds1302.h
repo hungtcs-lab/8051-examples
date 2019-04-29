@@ -12,6 +12,7 @@
 #define DS1302_ADDR_DAY       0x8A
 #define DS1302_ADDR_YEAR      0x8C
 #define DS1302_ADDR_CONTROL   0x8E
+#define DS1302_CLOCK_BURST    0xBE
 
 
 typedef struct __DS1302_DATETIME
