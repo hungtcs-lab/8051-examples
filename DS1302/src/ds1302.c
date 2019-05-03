@@ -23,8 +23,7 @@ uint8_t ds1302_read()
       data |= 0x80;
     }
     DS1302_SCK = 1;
-    // !!不置零会读取数据错误
-    DS1302_SDA = 0;
+    __nop();
   }
   return data;
 }
@@ -48,6 +47,7 @@ uint8_t ds1302_read_register(uint8_t addr)
   DS1302_RST = 1;
   ds1302_write(addr | 0x01);
   data = ds1302_read();
+  DS1302_SCK = 0;
   DS1302_RST = 0;
   return data;
 }
@@ -59,6 +59,7 @@ void ds1302_write_register(uint8_t addr, uint8_t data)
   DS1302_RST = 1;
   ds1302_write(addr);
   ds1302_write(data);
+  DS1302_SCK = 0;
   DS1302_RST = 0;
 }
 
@@ -81,12 +82,12 @@ void ds1302_get_datetime(DS1302_DATETIME *datetime)
 
 void ds1302_set_datetime(DS1302_DATETIME *datetime)
 {
-  ds1302_write_register(DS1302_ADDR_CONTROL, 0x00);
+  ds1302_write_enable();
   DS1302_RST = 0;
   DS1302_SCK = 0;
   DS1302_RST = 1;
   ds1302_write(DS1302_CLOCK_BURST);
-  ds1302_write(ds1302_to_bcd(datetime -> second));
+  ds1302_write(ds1302_to_bcd(datetime -> second) | 0x80);
   ds1302_write(ds1302_to_bcd(datetime -> minute));
   ds1302_write(ds1302_to_bcd(datetime -> hour));
   ds1302_write(ds1302_to_bcd(datetime -> date));
@@ -95,4 +96,18 @@ void ds1302_set_datetime(DS1302_DATETIME *datetime)
   ds1302_write(ds1302_to_bcd(datetime -> year));
   ds1302_write(0x80);
   DS1302_RST = 0;
+}
+
+void ds1302_halt()
+{
+  ds1302_write_enable();
+  ds1302_write_register(DS1302_ADDR_SEC, ds1302_read_register(DS1302_ADDR_SEC) | 0x80);
+  ds1302_write_disable();
+}
+
+void ds1302_start()
+{
+  ds1302_write_enable();
+  ds1302_write_register(DS1302_ADDR_SEC, ds1302_read_register(DS1302_ADDR_SEC) & 0x7F);
+  ds1302_write_disable();
 }
