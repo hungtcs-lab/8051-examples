@@ -71,11 +71,13 @@ uint8_t iic_read_byte(void)
   for(i=0; i<8; i++)
   {
     IIC_SCL = 0;
+    // 如果主机发送ack将总线拉低，因为线与的关系这里要释放总线
+    IIC_SDA = 1;
     __nop(); __nop();
     data <<= 1;
     IIC_SCL = 1;
     __nop(); __nop();
-    data |= (uint8_t)IIC_SDA;
+    data |= IIC_SDA;
   }
   return data;
 }
