@@ -22,4 +22,8 @@ void iic_send_byte(uint8_t data);
 
 uint8_t iic_read_byte(void);
 
+uint8_t iic_single_byte_read(uint8_t deviceAddress, uint8_t registerAddress, uint8_t *data);
+
+uint8_t iic_single_byte_write(uint8_t deviceAddress, uint8_t registerAddress, uint8_t data);
+
 #endif // __IIC_H__
