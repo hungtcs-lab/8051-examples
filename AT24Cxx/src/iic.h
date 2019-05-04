@@ -1,9 +1,9 @@
 #ifndef __IIC_H__
 #define __IIC_H__
 
+#include <stdint.h>
 #include "delay.h"
 #include "config.h"
-#include "stdint.h"
 
 #define IIC_ACK    0
 #define IIC_NACK   1

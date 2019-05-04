@@ -1,7 +1,7 @@
+#include <stdio.h>
+#include <mcs51/8051.h>
 #include "iic.h"
 #include "delay.h"
-#include "stdio.h"
-#include <mcs51/8051.h>
 
 int putchar(int c)
 {
