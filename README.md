@@ -1,17 +1,39 @@
-8051-examples
+51单片机示例
 ====
 
-examples for 8051 microcontroller.
+<details>
+  <summary>基础</summary>
+  <p>
 
-### OLED
-- [full-and-clear](OLED/full-and-clear)
-- [temperature-hygrometer](OLED/temperature-hygrometer)
+  - [Blink](./Basic/Blink)
+  - [Timer](./Basic/Timer)
+  </p>
+</details>
+<details>
+  <summary>通讯总线</summary>
+  <p>
 
-### DHT22
-- [DHT22](DHT22)
+  - [SPI](./Bus/SPI)
+  - [IIC](./Bus/IIC)
+  </p>
+</details>
+<details>
+  <summary>常用模块</summary>
+  <p>
 
-### DS18B20
-- [DS18B20](DS18B20)
+  - [AT24Cxx](./Modules/AT24Cxx)
+  - [DHT22](./Modules/DHT22)
+  - [DS1302](./Modules/DS1302)
+  - [DS18B20](./Modules/DS18B20)
+  - [nRF24](./Modules/nRF24)
+  - [OLED](./Modules/OLED)
+  - [PCF8563](./Modules/PCF8563)
+  </p>
+</details>
+<details>
+  <summary>其他</summary>
+  <p>
 
-### DS1302
-- [DS1302](DS1302)
+  _暂未整理_
+  </p>
+</details>
