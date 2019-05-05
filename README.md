@@ -40,8 +40,8 @@
 </details>
 
 ### 推荐工具链
-- [`SDCC`](http://sdcc.sourceforge.net/) _small device C compiler_
-- [STCFlash](https://github.com/laborer/stcflash) _A command line programmer for STC 8051 microcontroller_
+- [`sdcc`](http://sdcc.sourceforge.net/) _small device C compiler_
+- [`stcflash`](https://github.com/laborer/stcflash) _A command line programmer for STC 8051 microcontroller_
 - [`Visual Studio Code`](https://code.visualstudio.com/)编辑器，推荐安装以下插件
     - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) _language support for C/C++ to Visual Studio Code_
     - [Doxygen Documentation Generator](https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen) _Doxygen Documentation generation on the fly by starting a Doxygen comment block and pressing enter_
