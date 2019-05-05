@@ -1,4 +1,4 @@
-#include "nRF24.h"
+#include "nrf24l01.h"
 
 uint8_t nrf24_read_register(uint8_t address, uint8_t *data, uint8_t length)
 {

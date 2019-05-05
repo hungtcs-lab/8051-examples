@@ -1,8 +1,8 @@
-#include "delay.h"
-#include "stdio.h"
-#include "nRF24.h"
-#include "serial.h"
+#include <stdio.h>
 #include <mcs51/8051.h>
+#include "delay.h"
+#include "serial.h"
+#include "nrf24l01.h"
 
 int putchar(int c)
 {

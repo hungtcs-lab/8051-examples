@@ -1,5 +1,5 @@
-#ifndef __NRF24_H__
-#define __NRF24_H__
+#ifndef __NRF24L01_H__
+#define __NRF24L01_H__
 
 #include "spi.h"
 #include "config.h"
@@ -80,4 +80,4 @@ void nrf24_transmit(uint8_t *address, uint8_t *data);
 uint8_t nrf24_available(void);
 void nrf24_read_received_data(uint8_t *rx_data);
 
-#endif // __NRF24_H__
+#endif // __NRF24L01_H__
