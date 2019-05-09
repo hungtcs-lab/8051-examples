@@ -25,10 +25,10 @@ VPATH=$(PRJ_SRC_DIR)
 
 .PHONY: clean
 
-all: $(TARGET)
+all: $(TARGET) | $(OUTPUT_DIR)
 
-# $(OUTPUT_DIR)/%.rel: %.c
-# 	$(CC) $(CFLAGS) $(INCLUDE) -c $?
+$(OUTPUT_DIR):
+	mkdir -p "$(OUTPUT_DIR)"
 
 $(OUTPUT_DIR)/%.rel: %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $? -o $@
@@ -40,4 +40,4 @@ flash: $(TARGET)
 	stcflash --protocol $(DEVICE)  $(TARGET)
 
 clean:
-	rm $(OUTPUT_DIR)/*
+	if [ -d "$(OUTPUT_DIR)" ]; then /bin/rm -rf $(OUTPUT_DIR)/*; fi

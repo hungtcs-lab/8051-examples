@@ -3,8 +3,8 @@
 
 #include <mcs51/8051.h>
 
-#define DS1302_RST     P0_0
-#define DS1302_SDA     P0_1
-#define DS1302_SCK     P0_2
+#define DS1302_SCK     P1_0
+#define DS1302_SDA     P1_1
+#define DS1302_RST     P1_2
 
 #endif // __CONFIG_H__

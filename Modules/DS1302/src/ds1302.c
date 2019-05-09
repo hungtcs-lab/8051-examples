@@ -7,7 +7,7 @@ uint8_t ds1302_to_bcd(uint8_t value)
 
 uint8_t ds1302_from_bcd(uint8_t bcd)
 {
-  return ((bcd & 0x70) >> 4) * 10 + (bcd & 0x0F);
+  return ((bcd & 0xF0) >> 4) * 10 + (bcd & 0x0F);
 }
 
 uint8_t ds1302_read()
