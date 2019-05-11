@@ -27,17 +27,17 @@ VPATH=$(PRJ_SRC_DIR)
 
 all: $(TARGET)
 
-# $(OUTPUT_DIR)/%.rel: %.c
-# 	$(CC) $(CFLAGS) $(INCLUDE) -c $?
-
-$(OUTPUT_DIR)/%.rel: %.c
+$(OUTPUT_DIR)/%.rel: %.c | $(OUTPUT_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $? -o $@
 
 $(TARGET): $(PRJ_OBJECTS)
 	$(CC) $(CFLAGS) -o $(TARGET) $^
 
+$(OUTPUT_DIR):
+	mkdir -p "$(OUTPUT_DIR)"
+
 flash: $(TARGET)
-	stcflash --protocol $(DEVICE)  $(TARGET)
+	stcflash --protocol $(DEVICE) --port /dev/ttyUSB1 $(TARGET)
 
 clean:
-	rm $(OUTPUT_DIR)/*
+	if [ -d "$(OUTPUT_DIR)" ]; then /bin/rm -rf $(OUTPUT_DIR)/*; fi

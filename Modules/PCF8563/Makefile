@@ -25,19 +25,19 @@ VPATH=$(PRJ_SRC_DIR)
 
 .PHONY: clean
 
-all: $(TARGET) | $(OUTPUT_DIR)
+all: $(TARGET)
 
-$(OUTPUT_DIR):
-	mkdir -p "$(OUTPUT_DIR)"
-
-$(OUTPUT_DIR)/%.rel: %.c
+$(OUTPUT_DIR)/%.rel: %.c | $(OUTPUT_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $? -o $@
 
 $(TARGET): $(PRJ_OBJECTS)
 	$(CC) $(CFLAGS) -o $(TARGET) $^
 
+$(OUTPUT_DIR):
+	mkdir -p "$(OUTPUT_DIR)"
+
 flash: $(TARGET)
-	stcflash --protocol $(DEVICE)  $(TARGET)
+	stcflash --protocol $(DEVICE) --port /dev/ttyUSB1 $(TARGET)
 
 clean:
 	if [ -d "$(OUTPUT_DIR)" ]; then /bin/rm -rf $(OUTPUT_DIR)/*; fi

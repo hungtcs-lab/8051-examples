@@ -1,11 +1,12 @@
-DEVICE = STC89C52
+# 89, 12c5a, 12c52, 12cx052
+DEVICE = 89
 # set compiler path & parameters
 CC_ROOT =
 CC      = sdcc
 CFLAGS  =
 
 # set output folder and target name
-OUTPUT_DIR = ./$(DEVICE)
+OUTPUT_DIR = ./dist/$(DEVICE)
 TARGET     = $(OUTPUT_DIR)/$(DEVICE).hex
 
 # set project folder and files (all *.c)
@@ -26,17 +27,17 @@ VPATH=$(PRJ_SRC_DIR)
 
 all: $(TARGET)
 
-# $(OUTPUT_DIR)/%.rel: %.c
-# 	$(CC) $(CFLAGS) $(INCLUDE) -c $?
-
-$(OUTPUT_DIR)/%.rel: %.c
+$(OUTPUT_DIR)/%.rel: %.c | $(OUTPUT_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $? -o $@
 
 $(TARGET): $(PRJ_OBJECTS)
 	$(CC) $(CFLAGS) -o $(TARGET) $^
 
+$(OUTPUT_DIR):
+	mkdir -p "$(OUTPUT_DIR)"
+
 flash: $(TARGET)
-	stcflash $(TARGET)
+	stcflash --protocol $(DEVICE) --port /dev/ttyUSB1 $(TARGET)
 
 clean:
-	rm $(OUTPUT_DIR)/*
+	if [ -d "$(OUTPUT_DIR)" ]; then /bin/rm -rf $(OUTPUT_DIR)/*; fi
