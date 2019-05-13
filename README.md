@@ -22,7 +22,7 @@
   <summary>常用模块</summary>
   <p>
 
-  - [AT24Cxx](./Modules/AT24Cxx) _AT24Cxx是串行CMOS E2PROM_
+  - [AT24C](./Modules/AT24C) _AT24Cxx是串行CMOS E2PROM_
   - [DHT22](./Modules/DHT22) _温湿度传感器_
   - [DS1302](./Modules/DS1302) _DS1302是由美国DALLAS公司推出的具有涓细电流充电能力的低功耗实时时钟芯片_
   - [HC-SR04](./Modules/HC-SR04) _HC-SR04是一款超声测距模块_

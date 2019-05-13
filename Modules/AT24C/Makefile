@@ -37,7 +37,7 @@ $(OUTPUT_DIR):
 	mkdir -p "$(OUTPUT_DIR)"
 
 flash: $(TARGET)
-	stcflash --protocol $(DEVICE) --port /dev/ttyUSB1 $(TARGET)
+	stcflash --protocol $(DEVICE) --port /dev/ttyUSB0 $(TARGET)
 
 clean:
 	if [ -d "$(OUTPUT_DIR)" ]; then /bin/rm -rf $(OUTPUT_DIR)/*; fi
