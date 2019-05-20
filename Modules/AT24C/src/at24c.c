@@ -2,49 +2,12 @@
 
 uint8_t at24c_read_word(AT24C *at24c, uint8_t word_address, uint8_t *data)
 {
-  iic_start();
-  iic_send_byte(at24c -> device_address);
-  if(iic_read_ack() == IIC_NACK)
-  {
-    return 1;
-  }
-  iic_send_byte(word_address);
-  if(iic_read_ack() == IIC_NACK)
-  {
-    return 2;
-  }
-  iic_start();
-  iic_send_byte(at24c -> device_address | 0x01);
-  if(iic_read_ack() == IIC_NACK)
-  {
-    return 3;
-  }
-  *data = iic_read_byte();
-  iic_nack();
-  iic_stop();
-  return 0;
+  return iic_single_byte_read(at24c -> device_address, word_address, data);
 }
 
 uint8_t at24c_write_word(AT24C *at24c, uint8_t word_address, uint8_t data)
 {
-  iic_start();
-  iic_send_byte(at24c -> device_address);
-  if(iic_read_ack() == IIC_NACK)
-  {
-    return 1;
-  }
-  iic_send_byte(word_address);
-  if(iic_read_ack() == IIC_NACK)
-  {
-    return 2;
-  }
-  iic_send_byte(data);
-  if(iic_read_ack() == IIC_NACK)
-  {
-    return 3;
-  }
-  iic_stop();
-  return 0;
+  return iic_single_byte_write(at24c -> device_address, word_address, data);
 }
 
 uint8_t at24c_read_page(AT24C *at24c, uint8_t page, uint8_t *data)

@@ -4,7 +4,7 @@
 #include <mcs51/8051.h>
 
 // IIC pins
-#define IIC_SCL   P1_7
-#define IIC_SDA   P1_2
+#define IIC_SCL   P2_0
+#define IIC_SDA   P2_1
 
 #endif

@@ -42,6 +42,7 @@
 
 ### 推荐工具链
 - [`sdcc`](http://sdcc.sourceforge.net/) _small device C compiler_
+- [`cutecom`](http://cutecom.sourceforge.net/) _GUI串口调试器_
 - [`stcflash`](https://github.com/laborer/stcflash) _A command line programmer for STC 8051 microcontroller_
 - [`Visual Studio Code`](https://code.visualstudio.com/)编辑器，推荐安装以下插件
     - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) _language support for C/C++ to Visual Studio Code_

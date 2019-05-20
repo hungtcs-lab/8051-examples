@@ -1,5 +1,6 @@
 # 89, 12c5a, 12c52, 12cx052
 DEVICE = 89
+SERIAL_PORT = /dev/ttyUSB0
 # set compiler path & parameters
 CC_ROOT =
 CC      = sdcc
@@ -37,7 +38,7 @@ $(OUTPUT_DIR):
 	mkdir -p "$(OUTPUT_DIR)"
 
 flash: $(TARGET)
-	stcflash --protocol $(DEVICE) --port /dev/ttyUSB1 $(TARGET)
+	stcflash --protocol $(DEVICE) --port $(SERIAL_PORT) $(TARGET)
 
 clean:
 	if [ -d "$(OUTPUT_DIR)" ]; then /bin/rm -rf $(OUTPUT_DIR)/*; fi
