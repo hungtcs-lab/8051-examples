@@ -1,6 +1,11 @@
 51单片机示例
 ====
 
+作者会在以下平台不定期更新教程视频
+
+[![](./bilibili.svg)](https://space.bilibili.com/25043249)
+[![](./youtube.svg)](https://www.youtube.com/channel/UCmGaZOmnP5qx8bbdsPrBPtg)
+
 ### 目录
 <details>
   <summary>基础</summary>
