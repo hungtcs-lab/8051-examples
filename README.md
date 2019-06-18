@@ -31,6 +31,7 @@
   - [DHT22](./Modules/DHT22) _温湿度传感器_
   - [DS1302](./Modules/DS1302) _DS1302是由美国DALLAS公司推出的具有涓细电流充电能力的低功耗实时时钟芯片_
   - [HC-SR04](./Modules/HC-SR04) _HC-SR04是一款超声测距模块_
+  - [IR-NEC](./Modules/IR-NEC) _解析NEC红外遥控协议_
   - [DS18B20](./Modules/DS18B20) _DS18B20是常用的数字温度传感器_
   - [NRF24L01](./Modules/NRF24L01) _nRF24L01是由NORDIC生产的工作在2.4GHz~2.5GHz的ISM 频段的单片无线收发器芯片_
   - [OLED](./Modules/OLED) _0.96寸OLED模块，主控是SSD1306_
