@@ -36,6 +36,7 @@
   - [NRF24L01](./Modules/NRF24L01) _nRF24L01是由NORDIC生产的工作在2.4GHz~2.5GHz的ISM 频段的单片无线收发器芯片_
   - [OLED](./Modules/OLED) _0.96寸OLED模块，主控是SSD1306_
   - [PCF8563](./Modules/PCF8563) _PCF8563是PHILIPS公司推出的一款工业级内含I2C总线接口功能的具有极低功耗的多功能时钟/日历芯片_
+  - [TCS34725](./Modules/TCS34725) _TCS34725顏色傳感器_
   - [TM1637-4-Digit-Tube-Display](./Modules/TM1637-4-Digit-Tube-Display) _4位数码管显示模块_
   </p>
 </details>
