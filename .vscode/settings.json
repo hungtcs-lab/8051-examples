@@ -1,11 +1,6 @@
 {
     "files.associations": {
-        "*.html": "html",
-        "8051.h": "c",
-        "stdio.h": "c",
-        "cstdio": "c",
-        "math.h": "c",
-        "stdlib.h": "c"
+      "TODO": "markdown"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
