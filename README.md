@@ -1,8 +1,6 @@
 51单片机示例
 ====
 
-作者会在以下平台不定期更新教程视频
-
 [![](./bilibili.svg)](https://space.bilibili.com/25043249)
 [![](./youtube.svg)](https://www.youtube.com/channel/UCmGaZOmnP5qx8bbdsPrBPtg)
 
@@ -57,3 +55,10 @@
     - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) _language support for C/C++ to Visual Studio Code_
     - [Doxygen Documentation Generator](https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen) _Doxygen Documentation generation on the fly by starting a Doxygen comment block and pressing enter_
     - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+
+### Tips
+- 如果你使用VSCode 和 `C/C++`插件，那么需要修改`.vscode/c_cpp_properties.json`文件中的`includePath`和`compilerPath`。
+- 如果你使用的sdcc版本大于3.6，那么需要修改`putchar`方法的定义。
+  > Mar 1st, 2018: SDCC 3.7.0 released.
+
+  > Changed putchar() prototype from void putchar(char) to int putchar(int) to improve standard-compliance and allow error reporting.
